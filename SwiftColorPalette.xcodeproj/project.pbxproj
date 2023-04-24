@@ -16,6 +16,16 @@
 		D4C57CFA29F68C5A0048423F /* SwiftColorPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57CF929F68C5A0048423F /* SwiftColorPaletteTests.swift */; };
 		D4C57D0429F68C5A0048423F /* SwiftColorPaletteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D0329F68C5A0048423F /* SwiftColorPaletteUITests.swift */; };
 		D4C57D0629F68C5A0048423F /* SwiftColorPaletteUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D0529F68C5A0048423F /* SwiftColorPaletteUITestsLaunchTests.swift */; };
+		D4C57D1529F68D350048423F /* ArrayHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1429F68D350048423F /* ArrayHorizontalView.swift */; };
+		D4C57D1729F68D5D0048423F /* ArrayElemViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1629F68D5D0048423F /* ArrayElemViewProtocol.swift */; };
+		D4C57D1929F68FC70048423F /* ColorElemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1829F68FC70048423F /* ColorElemView.swift */; };
+		D4C57D1C29F68FFD0048423F /* ColorPalette_UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1B29F68FFD0048423F /* ColorPalette_UIImageExtensions.swift */; };
+		D4C57D1E29F690190048423F /* ColorPalette_UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1D29F690190048423F /* ColorPalette_UIColorExtensions.swift */; };
+		D4C57D2029F690300048423F /* ColorPalette_UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D1F29F690300048423F /* ColorPalette_UIImageViewExtensions.swift */; };
+		D4C57D2229F690420048423F /* ColorPalette_UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D2129F690420048423F /* ColorPalette_UIViewExtensions.swift */; };
+		D4C57D2429F6907A0048423F /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D2329F6907A0048423F /* ColorData.swift */; };
+		D4C57D2729F6911F0048423F /* ColorPalette_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D2629F6911F0048423F /* ColorPalette_Image.swift */; };
+		D4C57D2929F691350048423F /* ColorPalette_Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57D2829F691350048423F /* ColorPalette_Paths.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +59,16 @@
 		D4C57CFF29F68C5A0048423F /* SwiftColorPaletteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftColorPaletteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C57D0329F68C5A0048423F /* SwiftColorPaletteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftColorPaletteUITests.swift; sourceTree = "<group>"; };
 		D4C57D0529F68C5A0048423F /* SwiftColorPaletteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftColorPaletteUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D4C57D1429F68D350048423F /* ArrayHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHorizontalView.swift; sourceTree = "<group>"; };
+		D4C57D1629F68D5D0048423F /* ArrayElemViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayElemViewProtocol.swift; sourceTree = "<group>"; };
+		D4C57D1829F68FC70048423F /* ColorElemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorElemView.swift; sourceTree = "<group>"; };
+		D4C57D1B29F68FFD0048423F /* ColorPalette_UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_UIImageExtensions.swift; sourceTree = "<group>"; };
+		D4C57D1D29F690190048423F /* ColorPalette_UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_UIColorExtensions.swift; sourceTree = "<group>"; };
+		D4C57D1F29F690300048423F /* ColorPalette_UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_UIImageViewExtensions.swift; sourceTree = "<group>"; };
+		D4C57D2129F690420048423F /* ColorPalette_UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_UIViewExtensions.swift; sourceTree = "<group>"; };
+		D4C57D2329F6907A0048423F /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
+		D4C57D2629F6911F0048423F /* ColorPalette_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_Image.swift; sourceTree = "<group>"; };
+		D4C57D2829F691350048423F /* ColorPalette_Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette_Paths.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +122,10 @@
 				D4C57CE229F68C580048423F /* AppDelegate.swift */,
 				D4C57CE429F68C580048423F /* SceneDelegate.swift */,
 				D4C57CE629F68C580048423F /* ViewController.swift */,
+				D4C57D2329F6907A0048423F /* ColorData.swift */,
+				D4C57D1229F68CB10048423F /* ArrayHorizontalView */,
+				D4C57D1A29F68FE60048423F /* ColorPaletteExtensions */,
+				D4C57D2529F691090048423F /* ColorPaletteUtils */,
 				D4C57CE829F68C580048423F /* Main.storyboard */,
 				D4C57CEB29F68C5A0048423F /* Assets.xcassets */,
 				D4C57CED29F68C5A0048423F /* LaunchScreen.storyboard */,
@@ -125,6 +149,36 @@
 				D4C57D0529F68C5A0048423F /* SwiftColorPaletteUITestsLaunchTests.swift */,
 			);
 			path = SwiftColorPaletteUITests;
+			sourceTree = "<group>";
+		};
+		D4C57D1229F68CB10048423F /* ArrayHorizontalView */ = {
+			isa = PBXGroup;
+			children = (
+				D4C57D1429F68D350048423F /* ArrayHorizontalView.swift */,
+				D4C57D1629F68D5D0048423F /* ArrayElemViewProtocol.swift */,
+				D4C57D1829F68FC70048423F /* ColorElemView.swift */,
+			);
+			path = ArrayHorizontalView;
+			sourceTree = "<group>";
+		};
+		D4C57D1A29F68FE60048423F /* ColorPaletteExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				D4C57D1B29F68FFD0048423F /* ColorPalette_UIImageExtensions.swift */,
+				D4C57D1D29F690190048423F /* ColorPalette_UIColorExtensions.swift */,
+				D4C57D1F29F690300048423F /* ColorPalette_UIImageViewExtensions.swift */,
+				D4C57D2129F690420048423F /* ColorPalette_UIViewExtensions.swift */,
+			);
+			path = ColorPaletteExtensions;
+			sourceTree = "<group>";
+		};
+		D4C57D2529F691090048423F /* ColorPaletteUtils */ = {
+			isa = PBXGroup;
+			children = (
+				D4C57D2629F6911F0048423F /* ColorPalette_Image.swift */,
+				D4C57D2829F691350048423F /* ColorPalette_Paths.swift */,
+			);
+			path = ColorPaletteUtils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +312,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C57D2929F691350048423F /* ColorPalette_Paths.swift in Sources */,
+				D4C57D1729F68D5D0048423F /* ArrayElemViewProtocol.swift in Sources */,
+				D4C57D1E29F690190048423F /* ColorPalette_UIColorExtensions.swift in Sources */,
+				D4C57D1C29F68FFD0048423F /* ColorPalette_UIImageExtensions.swift in Sources */,
+				D4C57D1529F68D350048423F /* ArrayHorizontalView.swift in Sources */,
+				D4C57D2429F6907A0048423F /* ColorData.swift in Sources */,
 				D4C57CE729F68C580048423F /* ViewController.swift in Sources */,
+				D4C57D1929F68FC70048423F /* ColorElemView.swift in Sources */,
+				D4C57D2729F6911F0048423F /* ColorPalette_Image.swift in Sources */,
+				D4C57D2029F690300048423F /* ColorPalette_UIImageViewExtensions.swift in Sources */,
 				D4C57CE329F68C580048423F /* AppDelegate.swift in Sources */,
+				D4C57D2229F690420048423F /* ColorPalette_UIViewExtensions.swift in Sources */,
 				D4C57CE529F68C580048423F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,9 +499,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59LR79WH8J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftColorPalette/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -445,6 +509,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,6 +517,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eisukekusachi.SwiftColorPalette;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -463,9 +529,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59LR79WH8J;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftColorPalette/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -473,6 +539,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,6 +547,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eisukekusachi.SwiftColorPalette;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
