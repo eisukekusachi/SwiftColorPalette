@@ -23,7 +23,6 @@ class ColorData {
     
     func removeColorData(at index: Int) {
         guard index < colorArray.count else { return }
-        
         colorArray.remove(at: index)
     }
     func insert(colorData color: UIColor, at index: Int) {

@@ -10,6 +10,8 @@ import UIKit
 protocol ArrayElemViewProtocol: UIView {
     associatedtype Elem
     
+    var elem: Elem? { get }
+    
     init(elem: Elem)
     
     func refreshView(with elem: Elem)

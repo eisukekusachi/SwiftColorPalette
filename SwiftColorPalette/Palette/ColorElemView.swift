@@ -10,7 +10,7 @@ import UIKit
 class ColorElemView: UIView, ArrayElemViewProtocol {
     typealias Elem = UIColor
     
-    var elem: Elem!
+    var elem: Elem?
     
     private let backgroundImageView = UIImageView()
     private let colorView = UIView()
@@ -73,7 +73,9 @@ class ColorElemView: UIView, ArrayElemViewProtocol {
         selectedImageView.contentMode = .scaleAspectFill
         selectedImageView.isHidden = true
         
-        refreshView(with: elem)
+        if let elem = elem {
+            refreshView(with: elem)
+        }
     }
     
     override func layoutSubviews() {

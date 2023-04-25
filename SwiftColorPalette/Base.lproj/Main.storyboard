@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,15 +28,24 @@
                                 <rect key="frame" x="164.66666666666666" y="103" width="64" height="64"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the selected color to show the color adjustment view." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnn-zM-zBK">
+                                <rect key="frame" x="39.333333333333343" y="418.33333333333331" width="314.33333333333326" height="40.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="gnn-zM-zBK" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="4wa-OC-WPs"/>
                             <constraint firstItem="n9z-a9-7bC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="6MY-ri-Jtf"/>
                             <constraint firstItem="n9z-a9-7bC" firstAttribute="trailing" secondItem="VsK-w1-Wb8" secondAttribute="trailing" id="882-TT-r2Z"/>
                             <constraint firstItem="VsK-w1-Wb8" firstAttribute="leading" secondItem="n9z-a9-7bC" secondAttribute="leading" id="RNu-3O-vfg"/>
                             <constraint firstItem="VsK-w1-Wb8" firstAttribute="top" secondItem="n9z-a9-7bC" secondAttribute="top" id="d9C-rC-x01"/>
+                            <constraint firstItem="gnn-zM-zBK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="qSu-N6-BZP"/>
                             <constraint firstItem="n9z-a9-7bC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uCN-66-KqX"/>
+                            <constraint firstItem="gnn-zM-zBK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="y2h-nd-TSk"/>
                             <constraint firstItem="n9z-a9-7bC" firstAttribute="bottom" secondItem="VsK-w1-Wb8" secondAttribute="bottom" id="zNT-hX-g4C"/>
                         </constraints>
                     </view>
