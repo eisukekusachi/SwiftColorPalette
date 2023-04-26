@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let colorData = ColorData()
-    var colorAdjustment = ColorAdjustmentPopup(title: "Color Palette",
+    let colorAdjustment = ColorAdjustmentPopup(title: "Color Palette",
                                                segmentViews: [
                                                 GridSegmentView(),
                                                 SpectrumSegmentView(),
@@ -33,11 +33,11 @@ class ViewController: UIViewController {
         
         // When the color changes.
         observers.append(
-            colorAdjustment.observe(\.color, options: [.old, .new]) { [unowned self] _, change in
+            colorAdjustment.observe(\.color, options: [.new]) { [unowned self] _, change in
                 guard let color = change.newValue else { return }
                 
-                colorPalette.refreshView(with: color) { [unowned self] newColor, index in
-                    colorData.colorArray[index] = newColor
+                colorPalette.refreshView(with: color) { [unowned self] newColor, currentIndex in
+                    colorData.colorArray[currentIndex] = newColor
                 }
                 resultColorView.backgroundColor = currentPaletteColor
             }
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         
         // When the palette is scrolled.
         observers.append(
-            colorPalette.observe(\.scrollContentOffset, options: [.old, .new]) { [unowned self] _, change in
+            colorPalette.observe(\.scrollContentOffset) { [unowned self] _, _ in
                 
                 colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
             }
@@ -102,6 +102,7 @@ class ViewController: UIViewController {
     private func addColorPalette() {
         
         view.addSubview(colorPalette)
+        
         colorPalette.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -120,7 +121,6 @@ class ViewController: UIViewController {
         colorAdjustment.translatesAutoresizingMaskIntoConstraints = false
         
         let multiplier = UIDevice.current.userInterfaceIdiom == .phone ? 0.8 : 0.4
-        
         NSLayoutConstraint.activate([
             colorAdjustment.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier),
             colorAdjustment.centerXAnchor.constraint(equalTo: colorPalette.centerXAnchor),
