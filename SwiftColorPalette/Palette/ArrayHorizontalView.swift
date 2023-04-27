@@ -70,7 +70,7 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
             self.minCount = self.maxCount
         }
         
-        self.currentIndex = min(currentIndex, arrayView.arrangedSubviews.count)
+        self.currentIndex = min(currentIndex, arrayView.arrangedSubviews.count - 1)
         highlight(index: self.currentIndex)
     }
     
