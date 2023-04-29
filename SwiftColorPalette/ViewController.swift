@@ -39,7 +39,7 @@ class ViewController: UIViewController {
                 colorPalette.refreshView(with: color) { [unowned self] newColor, currentIndex in
                     colorData.colorArray[currentIndex] = newColor
                 }
-                resultColorView.backgroundColor = currentPaletteColor
+                resultColorView.backgroundColor = colorData.colorArray[colorPalette.currentIndex]
             }
         )
         
@@ -54,13 +54,14 @@ class ViewController: UIViewController {
                     showToast("It cannot be removed any more")
                 }
             }
-            colorAdjustment.refreshView(with: currentPaletteColor)
+            colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
             
         }, for: .touchUpInside)
         
         colorAdjustment.duplicateButton.addAction(.init { [unowned self] _ in
             
-            colorPalette.duplicate(elem: currentPaletteColor) { [unowned self] success, newColor, indexToBeInserted in
+            let color = colorData.colorArray[colorPalette.currentIndex]
+            colorPalette.duplicate(elem: color) { [unowned self] success, newColor, indexToBeInserted in
                 if success {
                     colorData.insert(colorData: newColor, at: indexToBeInserted)
                     
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
                     showToast("It cannot be added any more")
                 }
             }
-            colorAdjustment.refreshView(with: currentPaletteColor)
+            colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
             
         }, for: .touchUpInside)
     }
@@ -78,7 +79,7 @@ class ViewController: UIViewController {
         observers.append(
             colorPalette.observe(\.currentIndex, options: [.old, .new]) { [unowned self] _, change in
                 
-                colorAdjustment.refreshView(with: currentPaletteColor)
+                colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [unowned self] in
                     colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
@@ -112,7 +113,7 @@ class ViewController: UIViewController {
             colorPalette.heightAnchor.constraint(equalToConstant: 44)
         ])
         
-        resultColorView.backgroundColor = currentPaletteColor
+        resultColorView.backgroundColor = colorData.colorArray[colorPalette.currentIndex]
     }
     private func addColorAdjustment() {
         
@@ -127,12 +128,7 @@ class ViewController: UIViewController {
             colorAdjustment.bottomAnchor.constraint(equalTo: colorPalette.topAnchor, constant: -8),
         ])
     }
-}
-
-extension ViewController {
-    var currentPaletteColor: UIColor {
-        return colorData.colorArray[colorPalette.currentIndex]
-    }
+    
     private func toggleColorAdjustment() {
         if !view.exists(PopupViewWithArrow.self) {
             addColorAdjustment()

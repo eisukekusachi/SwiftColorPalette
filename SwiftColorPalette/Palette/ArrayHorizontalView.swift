@@ -132,16 +132,16 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
         }
         self.maxCount = max(self.maxCount, arrayView.arrangedSubviews.count)
     }
-    private func setParameters(elem: any ArrayElemViewProtocol, parentView: UIView) {
-        elem.translatesAutoresizingMaskIntoConstraints = false
+    private func initElemView(_ view: any ArrayElemViewProtocol, parentView: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            elem.topAnchor.constraint(equalTo: parentView.topAnchor),
-            elem.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
-            elem.widthAnchor.constraint(equalTo: elem.heightAnchor)
+            view.topAnchor.constraint(equalTo: parentView.topAnchor),
+            view.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
+            view.widthAnchor.constraint(equalTo: view.heightAnchor)
         ])
         
-        elem.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapView(_:))))
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapView(_:))))
     }
     override func layoutSubviews() {
         if frame.size != .zero {
@@ -199,6 +199,18 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     
     
     // MARK: Private methods
+    private func append(elems: [T.Elem?]) {
+        elems.forEach {
+            if let elem = $0 {
+                append(elem: elem)
+            }
+        }
+    }
+    private func append(elem: T.Elem) {
+        let targetView = T.self.init(elem: elem)
+        arrayView.addArrangedSubview(targetView)
+        initElemView(targetView, parentView: arrayView)
+    }
     private func highlight(index: Int) {
         for (stackViewIndex, elem) in arrayView.arrangedSubviews.enumerated() {
             (elem as? (any ArrayElemViewProtocol))?.highlight(stackViewIndex == index)
@@ -211,19 +223,6 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
         }
     }
     
-    private func append(elems: [T.Elem?]) {
-        elems.forEach {
-            if let elem = $0 {
-                append(elem: elem)
-            }
-        }
-    }
-    private func append(elem: T.Elem) {
-        let targetView = T.self.init(elem: elem)
-        arrayView.addArrangedSubview(targetView)
-        setParameters(elem: targetView, parentView: arrayView)
-    }
-    
     private func insert(elem: T.Elem?, at index: Int) {
         guard let elem = elem else { return }
         
@@ -231,7 +230,7 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
         
         let targetView = T.self.init(elem: elem)
         arrayView.insertArrangedSubview(targetView, at: index)
-        setParameters(elem: targetView, parentView: arrayView)
+        initElemView(targetView, parentView: arrayView)
         
         currentView?.highlight(true)
     }

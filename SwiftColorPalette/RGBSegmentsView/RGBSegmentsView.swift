@@ -12,8 +12,8 @@ class RGBSegmentsView: UIView {
     weak var colorAdjustmentDelegate: ColorAdjustmentDelegate?
     
     private let segmentedControl = UISegmentedControl()
-    private var segmentedViews: [ColorAdjustmentSegmentViewProtocol] = []
     private let segmentedViewContainer = UIView()
+    private var segmentedViews: [ColorAdjustmentSegmentViewProtocol] = []
     
     deinit {
         print("deinit ColorAdjustmentsSegmentedControlView")
