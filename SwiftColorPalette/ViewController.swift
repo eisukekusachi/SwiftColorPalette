@@ -59,8 +59,7 @@ class ViewController: UIViewController {
                 
                 let newColor = colorData.colorArray[colorPalette.currentIndex]
                 colorAdjustment.refreshView(with: newColor)
-                resultColorView.backgroundColor = newColor
-                    
+                
             } else {
                 showToast("It cannot be removed any more")
             }
