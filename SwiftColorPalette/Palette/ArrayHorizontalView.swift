@@ -157,42 +157,40 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     }
     
     // MARK: Methods
-    func duplicate(elem: T.Elem, _ callback: ((Bool, T.Elem, Int) -> Void)? = nil) {
-        if canDuplicateElem {
-            
-            let index = currentIndex + 1
-            
-            insert(elem: elem, at: index)
-            callback?(true, elem, index)
-            
-        } else {
-            callback?(false, elem, -1)
-        }
+    func refreshView(with elem: T.Elem, at index: Int) {
+        (arrayView.arrangedSubviews[index] as? T)?.refreshView(with: elem)
     }
-    func removeElem(_ callback: ((Bool, Int) -> Void)? = nil) {
-        if canRemoveElem {
+    func insert(elem: T.Elem?, at index: Int) {
+        guard let elem = elem else { return }
+        
+        currentView?.highlight(false)
+        
+        let targetView = T.self.init(elem: elem)
+        arrayView.insertArrangedSubview(targetView, at: index)
+        initElemView(targetView, parentView: arrayView)
+        
+        currentView?.highlight(true)
+    }
+    func removeElem(at index: Int) {
+        currentView?.highlight(false)
+        
+        if let targetView = (arrayView.arrangedSubviews[index] as? T) {
+            targetView.removeFromSuperview()
+            arrayView.removeArrangedSubview(targetView)
+        }
+        
+        currentView?.highlight(true)
+    }
+    func setArrayCountToCurrentIndex() {
+        if currentIndex > elemNum - 1 {
+            currentView?.highlight(false)
             
-            let index = currentIndex
+            currentIndex = elemNum - 1
             
-            removeElem(at: index)
-            callback?(true, index)
-            
-            if currentIndex > arrayView.subviews.count - 1 {
-                /*
-                 Change the currentIndex after the callback, because when the currentIndex changes, the observer reacts.
-                */
-                currentIndex = arrayView.subviews.count - 1
-            }
-            
-        } else {
-            callback?(false, -1)
+            currentView?.highlight(true)
         }
     }
     
-    func refreshView(with elem: T.Elem, _ callback: ((T.Elem, Int) -> Void)?) {
-        currentView?.refreshView(with: elem)
-        callback?(elem, currentIndex)
-    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollContentOffset = scrollView.contentOffset
     }
@@ -221,27 +219,5 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
             arrayView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
-    }
-    
-    private func insert(elem: T.Elem?, at index: Int) {
-        guard let elem = elem else { return }
-        
-        currentView?.highlight(false)
-        
-        let targetView = T.self.init(elem: elem)
-        arrayView.insertArrangedSubview(targetView, at: index)
-        initElemView(targetView, parentView: arrayView)
-        
-        currentView?.highlight(true)
-    }
-    private func removeElem(at index: Int) {
-        currentView?.highlight(false)
-        
-        if let targetView = (arrayView.arrangedSubviews[index] as? T) {
-            targetView.removeFromSuperview()
-            arrayView.removeArrangedSubview(targetView)
-        }
-        
-        currentView?.highlight(true)
     }
 }

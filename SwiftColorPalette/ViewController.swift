@@ -34,42 +34,52 @@ class ViewController: UIViewController {
         // When the color changes.
         observers.append(
             colorAdjustment.observe(\.color, options: [.new]) { [unowned self] _, change in
-                guard let color = change.newValue else { return }
+                guard let newColor = change.newValue else { return }
+                let index = colorPalette.currentIndex
                 
-                colorPalette.refreshView(with: color) { [unowned self] newColor, currentIndex in
-                    colorData.colorArray[currentIndex] = newColor
-                }
-                resultColorView.backgroundColor = colorData.colorArray[colorPalette.currentIndex]
+                colorData.colorArray[index] = newColor
+                colorPalette.refreshView(with: newColor, at: index)
+                
+                resultColorView.backgroundColor = newColor
             }
         )
         
         // When the remove / duplicate button is pressed.
         colorAdjustment.removeButton.addAction(.init { [unowned self] _ in
-            
-            colorPalette.removeElem { [unowned self] success, indexToBeDeleted in
-                if success {
-                    colorData.removeColorData(at: indexToBeDeleted)
-                    
-                } else {
-                    showToast("It cannot be removed any more")
+            if colorPalette.canRemoveElem {
+                
+                let index = colorPalette.currentIndex
+                
+                colorData.removeColorData(at: index)
+                colorPalette.removeElem(at: index)
+                
+                if colorPalette.currentIndex > colorPalette.elemNum - 1 {
+                    colorPalette.setArrayCountToCurrentIndex()
+                    colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
                 }
+                
+                let newColor = colorData.colorArray[colorPalette.currentIndex]
+                colorAdjustment.refreshView(with: newColor)
+                resultColorView.backgroundColor = newColor
+                    
+            } else {
+                showToast("It cannot be removed any more")
             }
-            colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
             
         }, for: .touchUpInside)
         
         colorAdjustment.duplicateButton.addAction(.init { [unowned self] _ in
-            
-            let color = colorData.colorArray[colorPalette.currentIndex]
-            colorPalette.duplicate(elem: color) { [unowned self] success, newColor, indexToBeInserted in
-                if success {
-                    colorData.insert(colorData: newColor, at: indexToBeInserted)
-                    
-                } else {
-                    showToast("It cannot be added any more")
-                }
+            if colorPalette.canDuplicateElem {
+                
+                let index = colorPalette.currentIndex
+                let color = colorData.colorArray[index]
+                
+                colorData.insert(colorData: color, at: index + 1)
+                colorPalette.insert(elem: color, at: index + 1)
+                
+            } else {
+                showToast("It cannot be added any more")
             }
-            colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
             
         }, for: .touchUpInside)
     }

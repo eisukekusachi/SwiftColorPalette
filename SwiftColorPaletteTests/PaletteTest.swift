@@ -10,6 +10,27 @@ import XCTest
 
 class PaletteTest: XCTestCase {
     
+    func duplicate(palette: ArrayHorizontalView<ColorElemView>, color: UIColor) -> Bool {
+        if palette.canDuplicateElem {
+            
+            let index = palette.currentIndex
+            palette.insert(elem: color, at: index + 1)
+            
+            return true
+        }
+        return false
+    }
+    func remove(palette: ArrayHorizontalView<ColorElemView>) -> Bool {
+        if palette.canRemoveElem {
+            
+            let index = palette.currentIndex
+            palette.removeElem(at: index)
+            
+            return true
+        }
+        return false
+    }
+    
     func testAddingColorsInPalette() {
         
         let colors: [UIColor] = [
@@ -23,13 +44,9 @@ class PaletteTest: XCTestCase {
         
         let maxCount = 3
         let palette = ArrayHorizontalView<ColorElemView>(colors, maxCount: maxCount)
-        palette.duplicate(elem: .black)
-        palette.duplicate(elem: .black) { success, _, _ in
-            XCTAssertTrue(success)
-        }
-        palette.duplicate(elem: .black) { success, _, _ in
-            XCTAssertFalse(success, "colors.count exceeds the max.")
-        }
+        XCTAssertTrue(duplicate(palette: palette, color: .black))
+        XCTAssertTrue(duplicate(palette: palette, color: .black))
+        XCTAssertFalse(duplicate(palette: palette, color: .black))
         
         XCTAssertEqual(palette.elems, resultColors)
     }
@@ -49,14 +66,9 @@ class PaletteTest: XCTestCase {
         
         let minCount = 2
         let palette = ArrayHorizontalView<ColorElemView>(colors, minCount: minCount)
-        
-        palette.removeElem()
-        palette.removeElem() { success, _ in
-            XCTAssertTrue(success)
-        }
-        palette.removeElem() { success, _ in
-            XCTAssertFalse(success, "colors.count exceeds the min.")
-        }
+        XCTAssertTrue(remove(palette: palette))
+        XCTAssertTrue(remove(palette: palette))
+        XCTAssertFalse(remove(palette: palette))
         
         XCTAssertEqual(palette.elems, resultColors)
     }
