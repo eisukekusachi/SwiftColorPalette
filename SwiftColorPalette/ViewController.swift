@@ -55,7 +55,6 @@ class ViewController: UIViewController {
                 
                 if colorPalette.currentIndex > colorPalette.elemNum - 1 {
                     colorPalette.setArrayCountToCurrentIndex()
-                    colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
                 }
                 
                 let newColor = colorData.colorArray[colorPalette.currentIndex]
