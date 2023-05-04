@@ -185,13 +185,11 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
         currentView?.highlight(true)
     }
     func setArrayCountToCurrentIndex() {
-        if currentIndex > elemNum - 1 {
-            currentView?.highlight(false)
-            
-            currentIndex = elemNum - 1
-            
-            currentView?.highlight(true)
-        }
+        currentView?.highlight(false)
+        
+        currentIndex = elemNum - 1
+        
+        currentView?.highlight(true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

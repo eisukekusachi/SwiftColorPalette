@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-    var alpha: CGFloat {
+    var nAlpha: CGFloat {
         
         var alpha = CGFloat(0)
         getRed(nil, green: nil, blue: nil, alpha: &alpha)

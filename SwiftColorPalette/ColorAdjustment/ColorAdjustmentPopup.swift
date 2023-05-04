@@ -144,7 +144,7 @@ class ColorAdjustmentPopup: PopupViewWithArrow {
     func refreshView(with color: UIColor) {
         
         storedRGBColor = color
-        storedAlpha = Int(color.alpha * 255)
+        storedAlpha = Int(color.nAlpha * 255)
         
         let newColor = currentColor
         
