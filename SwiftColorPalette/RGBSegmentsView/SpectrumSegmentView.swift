@@ -25,11 +25,11 @@ class SpectrumSegmentView: UIView, ColorAdjustmentSegmentViewProtocol {
             imageView.leftAnchor.constraint(equalTo: leftAnchor),
             imageView.rightAnchor.constraint(equalTo: rightAnchor),
             imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         let imagePath = Bundle.main.path(forResource: "spectrum_image_for_color_adjustment", ofType: "png")
-        imageView.image = UIImage(contentsOfFile:imagePath!)
+        imageView.image = UIImage(contentsOfFile: imagePath!)
         
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapGesture)))
@@ -45,7 +45,7 @@ class SpectrumSegmentView: UIView, ColorAdjustmentSegmentViewProtocol {
         }
     }
     @objc func panGesture(_ sender: UIPanGestureRecognizer) {
-        guard (sender.state == .began || sender.state == .changed) else { return }
+        guard sender.state == .began || sender.state == .changed else { return }
         
         if let color = imageView.getColor(location: sender.location(in: self)) {
             colorAdjustmentDelegate?.changeColor(color)

@@ -56,7 +56,7 @@ class RGBSegmentsView: UIView {
             
             segmentedViewContainer.leftAnchor.constraint(equalTo: leftAnchor),
             segmentedViewContainer.rightAnchor.constraint(equalTo: rightAnchor),
-            segmentedViewContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+            segmentedViewContainer.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     private func addParameters() {
@@ -100,7 +100,7 @@ class RGBSegmentsView: UIView {
                 $0.leftAnchor.constraint(equalTo: segmentedViewContainer.leftAnchor),
                 $0.rightAnchor.constraint(equalTo: segmentedViewContainer.rightAnchor),
                 $0.topAnchor.constraint(equalTo: segmentedViewContainer.topAnchor),
-                $0.bottomAnchor.constraint(equalTo: segmentedViewContainer.bottomAnchor),
+                $0.bottomAnchor.constraint(equalTo: segmentedViewContainer.bottomAnchor)
             ])
             
             $0.colorAdjustmentDelegate = self

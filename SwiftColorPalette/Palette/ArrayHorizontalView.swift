@@ -151,7 +151,7 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     }
     @objc private func tapView(_ sender: UITapGestureRecognizer) {
         guard let view = sender.view,
-              let index = arrayView.arrangedSubviews.firstIndex (of: view) else { return }
+              let index = arrayView.arrangedSubviews.firstIndex(of: view) else { return }
         
         didTapColor?(currentIndex, index)
         
