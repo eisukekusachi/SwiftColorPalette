@@ -19,12 +19,17 @@ protocol ColorAdjustmentSegmentViewProtocol: UIView {
 
 class ColorAdjustmentPopup: PopupViewWithArrow {
     
-    @objc private (set) dynamic var color: UIColor = .black {
+    private (set) var color: UIColor = .black {
         didSet {
+            didChangeColor?(color)
             colorAdjustmentDelegate?.changeColor(color)
         }
     }
     weak var colorAdjustmentDelegate: ColorAdjustmentDelegate?
+    
+    var didChangeColor: ((UIColor) -> Void)?
+    var didTapRemoveButton: (() -> Void)?
+    var didTapDuplicateButton: (() -> Void)?
     
     private var storedRGBColor: UIColor = .black
     private var storedAlpha: Int = 255
@@ -118,10 +123,16 @@ class ColorAdjustmentPopup: PopupViewWithArrow {
         removeButton.titleLabel?.font = UIFont(name: defaultBoldFontFamily, size: 15.0)
         removeButton.setTitle("Remove", for: .normal)
         removeButton.setTitleColor(.systemRed, for: .normal)
+        removeButton.addAction(.init { [unowned self] _ in
+            didTapRemoveButton?()
+        }, for: .touchUpInside)
         
         duplicateButton.titleLabel?.font = UIFont(name: defaultBoldFontFamily, size: 15.0)
         duplicateButton.setTitle("Duplicate", for: .normal)
         duplicateButton.setTitleColor(.label, for: .normal)
+        duplicateButton.addAction(.init { [unowned self] _ in
+            didTapDuplicateButton?()
+        }, for: .touchUpInside)
         
         buttonStackView.axis = .horizontal
         buttonStackView.distribution = .fillEqually

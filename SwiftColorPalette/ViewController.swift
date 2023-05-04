@@ -25,27 +25,49 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         addColorPalette()
-        addColorPaletteObservers()
-        addColorAdjustmentObservers()
+        addObservers()
     }
     
-    private func addColorAdjustmentObservers() {
+    private func addObservers() {
         
-        // When the color changes.
+        // If the index of the data changes, the adjustment is refreshed.
+        colorPalette.didTapColor = { [unowned self] previousIndex, currentIndex in
+            if previousIndex != currentIndex {
+                colorData.index = currentIndex
+                
+            } else {
+                toggleColorAdjustment()
+            }
+        }
         observers.append(
-            colorAdjustment.observe(\.color, options: [.new]) { [unowned self] _, change in
-                guard let newColor = change.newValue else { return }
-                let index = colorPalette.currentIndex
+            colorData.observe(\.index) { [unowned self] _, _ in
                 
-                colorData.colorArray[index] = newColor
-                colorPalette.refreshView(with: newColor, at: index)
+                let color = colorData.currentColor
+                refreshColorAdjustment(color)
                 
-                resultColorView.backgroundColor = newColor
+                resultColorView.backgroundColor = color
+            }
+        )
+        
+        // If the color of the data changes, the palette is refreshed.
+        colorAdjustment.didChangeColor = { [unowned self] color in
+            colorData.colorArray[colorData.index] = color
+        }
+        observers.append(
+            colorData.observe(\.colorArray) { [unowned self] _, _ in
+                guard   colorData.colorArray.count == colorPalette.elems.count &&
+                        colorData.index < colorData.colorArray.count else { return }
+                
+                let index = colorData.index
+                let color = colorData.colorArray[index]
+                colorPalette.refreshView(with: color, at: index)
+                
+                resultColorView.backgroundColor = color
             }
         )
         
         // When the remove / duplicate button is pressed.
-        colorAdjustment.removeButton.addAction(.init { [unowned self] _ in
+        colorAdjustment.didTapRemoveButton = { [unowned self] in
             if colorPalette.canRemoveElem {
                 
                 let index = colorPalette.currentIndex
@@ -56,17 +78,13 @@ class ViewController: UIViewController {
                 if colorPalette.currentIndex > colorPalette.elemNum - 1 {
                     colorPalette.setArrayCountToCurrentIndex()
                 }
-                
-                let newColor = colorData.colorArray[colorPalette.currentIndex]
-                colorAdjustment.refreshView(with: newColor)
+                colorData.index = colorPalette.currentIndex
                 
             } else {
                 showToast("It cannot be removed any more")
             }
-            
-        }, for: .touchUpInside)
-        
-        colorAdjustment.duplicateButton.addAction(.init { [unowned self] _ in
+        }
+        colorAdjustment.didTapDuplicateButton = { [unowned self] in
             if colorPalette.canDuplicateElem {
                 
                 let index = colorPalette.currentIndex
@@ -78,34 +96,12 @@ class ViewController: UIViewController {
             } else {
                 showToast("It cannot be added any more")
             }
-            
-        }, for: .touchUpInside)
-    }
-    private func addColorPaletteObservers() {
-        
-        // When the color is selected.
-        observers.append(
-            colorPalette.observe(\.currentIndex, options: [.old, .new]) { [unowned self] _, change in
-                
-                colorAdjustment.refreshView(with: colorData.colorArray[colorPalette.currentIndex])
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [unowned self] in
-                    colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
-                }
-                
-                if change.newValue == change.oldValue {
-                    toggleColorAdjustment()
-                }
-            }
-        )
+        }
         
         // When the palette is scrolled.
-        observers.append(
-            colorPalette.observe(\.scrollContentOffset) { [unowned self] _, _ in
-                
-                colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
-            }
-        )
+        colorPalette.didDragScrolView = { [unowned self] _ in
+            colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
+        }
     }
     
     private func addColorPalette() {
@@ -120,32 +116,38 @@ class ViewController: UIViewController {
             colorPalette.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             colorPalette.heightAnchor.constraint(equalToConstant: 44)
         ])
-        
-        resultColorView.backgroundColor = colorData.colorArray[colorPalette.currentIndex]
+        resultColorView.backgroundColor = colorData.currentColor
     }
-    private func addColorAdjustment() {
-        
-        view.addSubview(colorAdjustment)
-        
-        colorAdjustment.translatesAutoresizingMaskIntoConstraints = false
-        
-        let multiplier = UIDevice.current.userInterfaceIdiom == .phone ? 0.8 : 0.4
-        NSLayoutConstraint.activate([
-            colorAdjustment.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier),
-            colorAdjustment.centerXAnchor.constraint(equalTo: colorPalette.centerXAnchor),
-            colorAdjustment.bottomAnchor.constraint(equalTo: colorPalette.topAnchor, constant: -8),
-        ])
-    }
-    
     private func toggleColorAdjustment() {
-        if !view.exists(PopupViewWithArrow.self) {
-            addColorAdjustment()
+        if !view.exists(ColorAdjustmentPopup.self) {
+            
+            view.addSubview(colorAdjustment)
+            
+            colorAdjustment.translatesAutoresizingMaskIntoConstraints = false
+            
+            let multiplier = UIDevice.current.userInterfaceIdiom == .phone ? 0.8 : 0.4
+            NSLayoutConstraint.activate([
+                colorAdjustment.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier),
+                colorAdjustment.centerXAnchor.constraint(equalTo: colorPalette.centerXAnchor),
+                colorAdjustment.bottomAnchor.constraint(equalTo: colorPalette.topAnchor, constant: -8)
+            ])
+            
+            refreshColorAdjustment(colorData.currentColor)
             
         } else {
-            view.remove(PopupViewWithArrow.self)
+            colorAdjustment.removeFromSuperview()
         }
     }
     
+    private func refreshColorAdjustment(_ color: UIColor?) {
+        guard let color = color else { return }
+        
+        colorAdjustment.refreshView(with: color)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [unowned self] in
+            colorAdjustment.setArrowX(targetView: colorPalette.currentView, parentViewController: self)
+        }
+    }
     private func showToast(_ text: String) {
         if !view.exists(Toast.self) {
             view.addSubview(Toast(text: text))

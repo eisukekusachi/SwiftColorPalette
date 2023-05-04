@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ColorData {
-    var colorArray: [UIColor] = [
+class ColorData: NSObject {
+    @objc dynamic var index: Int = 0
+    @objc dynamic var colorArray: [UIColor] = [
         .red,
         .green,
         .blue,
@@ -20,6 +21,11 @@ class ColorData {
         Converter.color((255, 255, 0, 125)),
         Converter.color((0, 0, 0, 125))
     ]
+    
+    var currentColor: UIColor? {
+        guard index < colorArray.count else { return nil }
+        return colorArray[index]
+    }
     
     func removeColorData(at index: Int) {
         guard index < colorArray.count else { return }

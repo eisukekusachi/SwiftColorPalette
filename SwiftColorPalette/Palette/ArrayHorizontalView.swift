@@ -13,14 +13,15 @@ protocol ArrayViewDelegate: AnyObject {
 
 class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegate {
     
-    @objc private (set) dynamic var currentIndex: Int = 0 {
+    private (set) var currentIndex: Int = 0 {
         didSet {
             delegate?.changeIndex(currentIndex)
         }
     }
-    @objc private (set) dynamic var scrollContentOffset: CGPoint = .zero
-    
     weak var delegate: (any ArrayViewDelegate)?
+    
+    var didTapColor: ((Int, Int) -> Void)?
+    var didDragScrolView: ((CGPoint) -> Void)?
     
     var currentView: T? {
         guard currentIndex < arrayView.arrangedSubviews.count else { return nil }
@@ -152,6 +153,8 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
         guard let view = sender.view,
               let index = arrayView.arrangedSubviews.firstIndex (of: view) else { return }
         
+        didTapColor?(currentIndex, index)
+        
         currentIndex = index
         highlight(index: index)
     }
@@ -192,7 +195,7 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollContentOffset = scrollView.contentOffset
+        didDragScrolView?(scrollView.contentOffset)
     }
     
     
