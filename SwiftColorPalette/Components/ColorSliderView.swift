@@ -188,6 +188,9 @@ class ColorSliderView: UIView {
     }
     
     // MARK: Methods
+    func setTitle(_ title: String) {
+        self.nameLabel.text = title
+    }
     func setValue(_ value: Int) {
         slider.value = Float(value) / 255.0
         valueLabel.text = "\(value)"

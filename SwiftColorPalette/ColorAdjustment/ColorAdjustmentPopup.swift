@@ -63,8 +63,11 @@ class ColorAdjustmentPopup: PopupViewWithArrow {
         
         super.init(frame: .zero)
         
-        self.rgbSegmentsView = RGBSegmentsView(segmentViews: segmentViews, delegate: self)
-        self.alphaSlider = ColorSliderView(title: "Alpha", delegate: self)
+        rgbSegmentsView.colorAdjustmentDelegate = self
+        rgbSegmentsView.append(segmentViews: segmentViews)
+        
+        alphaSlider.delegate = self
+        alphaSlider.setTitle("Alpha")
         
         commonInit()
     }
