@@ -13,8 +13,8 @@ let componentsFontSize = 14.0
 
 class HexStringLabel: UIView {
     
-    private lazy var titleLabel = UILabel()
-    private lazy var valueLabel = UILabel()
+    private let titleLabel = UILabel()
+    private let valueLabel = UILabel()
     
     deinit {
         print("deinit HexColorLabel")

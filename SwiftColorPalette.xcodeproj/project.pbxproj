@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D484768629F7739800066A4A /* PaletteTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D484768529F7739800066A4A /* PaletteTest.swift */; };
+		D4B23A662A076226006F9198 /* ColorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B23A652A076226006F9198 /* ColorTest.swift */; };
 		D4C57CE329F68C580048423F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57CE229F68C580048423F /* AppDelegate.swift */; };
 		D4C57CE529F68C580048423F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57CE429F68C580048423F /* SceneDelegate.swift */; };
 		D4C57CE729F68C580048423F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C57CE629F68C580048423F /* ViewController.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		D484768529F7739800066A4A /* PaletteTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteTest.swift; sourceTree = "<group>"; };
+		D4B23A652A076226006F9198 /* ColorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTest.swift; sourceTree = "<group>"; };
 		D4C57CDF29F68C580048423F /* SwiftColorPalette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftColorPalette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C57CE229F68C580048423F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4C57CE429F68C580048423F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				D4C57CF929F68C5A0048423F /* SwiftColorPaletteTests.swift */,
 				D484768529F7739800066A4A /* PaletteTest.swift */,
+				D4B23A652A076226006F9198 /* ColorTest.swift */,
 			);
 			path = SwiftColorPaletteTests;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C57CFA29F68C5A0048423F /* SwiftColorPaletteTests.swift in Sources */,
+				D4B23A662A076226006F9198 /* ColorTest.swift in Sources */,
 				D484768629F7739800066A4A /* PaletteTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

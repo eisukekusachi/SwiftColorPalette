@@ -13,7 +13,7 @@ class PaletteTest: XCTestCase {
     func duplicate(palette: ArrayHorizontalView<ColorElemView>, color: UIColor) -> Bool {
         if palette.canDuplicateElem {
             
-            let index = palette.currentIndex
+            let index = palette.index
             palette.insert(elem: color, at: index + 1)
             
             return true
@@ -23,7 +23,7 @@ class PaletteTest: XCTestCase {
     func remove(palette: ArrayHorizontalView<ColorElemView>) -> Bool {
         if palette.canRemoveElem {
             
-            let index = palette.currentIndex
+            let index = palette.index
             palette.removeElem(at: index)
             
             return true

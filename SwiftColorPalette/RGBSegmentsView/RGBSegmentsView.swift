@@ -11,6 +11,10 @@ class RGBSegmentsView: UIView {
     
     weak var colorAdjustmentDelegate: ColorAdjustmentDelegate?
     
+    var segmentViewCount: Int {
+        return segmentedViews.count
+    }
+    
     private let segmentedControl = UISegmentedControl()
     private let segmentedViewContainer = UIView()
     private var segmentedViews: [ColorAdjustmentSegmentViewProtocol] = []
@@ -79,7 +83,7 @@ class RGBSegmentsView: UIView {
         showSegmentView(at: segmentedControl.selectedSegmentIndex)
     }
     func refreshAllViews(with color: UIColor) {
-        segmentedViews.forEach { $0.setColor(color) }
+        segmentedViews.forEach { $0.refreshView(with: color) }
     }
     
     // MARK: Private methods

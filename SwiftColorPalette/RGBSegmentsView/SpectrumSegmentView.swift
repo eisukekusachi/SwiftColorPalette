@@ -52,5 +52,5 @@ class SpectrumSegmentView: UIView, ColorAdjustmentSegmentViewProtocol {
         }
     }
     
-    func setColor(_ color: UIColor) {}
+    func refreshView(with color: UIColor) {}
 }

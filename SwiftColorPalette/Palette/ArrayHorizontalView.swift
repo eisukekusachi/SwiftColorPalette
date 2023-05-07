@@ -13,28 +13,31 @@ protocol ArrayViewDelegate: AnyObject {
 
 class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegate {
     
-    private (set) var currentIndex: Int = 0 {
+    private (set) var index: Int = 0 {
         didSet {
-            delegate?.changeIndex(currentIndex)
+            delegate?.changeIndex(index)
         }
     }
     weak var delegate: (any ArrayViewDelegate)?
     
-    var didTapColor: ((Int, Int) -> Void)?
+    var didChangeIndex: ((Int, Int) -> Void)?
     var didDragScrolView: ((CGPoint) -> Void)?
     
     var currentView: T? {
-        guard currentIndex < arrayView.arrangedSubviews.count else { return nil }
-        return (arrayView.arrangedSubviews[currentIndex] as? T)
+        guard index < arrayView.arrangedSubviews.count else { return nil }
+        return (arrayView.arrangedSubviews[index] as? T)
     }
     
+    var elem: T.Elem? {
+        return (arrayView.arrangedSubviews[index] as? T)?.elem
+    }
     var elems: [T.Elem] {
         return arrayView.arrangedSubviews.compactMap { ($0 as? T)?.elem }
     }
-    
     var elemNum: Int {
         return arrayView.subviews.count
     }
+    
     var canDuplicateElem: Bool {
         return elemNum <= maxCount - 1
     }
@@ -52,15 +55,15 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     private let scrollView = UIScrollView()
     
     
-    init(_ elems: [T.Elem], delegate: ArrayViewDelegate? = nil, currentIndex: Int = 0, minCount: Int? = nil, maxCount: Int? = nil) {
+    init(_ elems: [T.Elem], delegate: ArrayViewDelegate? = nil, index: Int = 0, minCount: Int? = nil, maxCount: Int? = nil) {
         super.init(frame: .zero)
         
         self.delegate = delegate
         
         commonInit()
-        reset(elems, currentIndex: currentIndex, minCount: minCount, maxCount: maxCount)
+        reset(elems, index: index, minCount: minCount, maxCount: maxCount)
     }
-    func reset(_ elems: [T.Elem], currentIndex: Int = 0, minCount: Int? = nil, maxCount: Int? = nil) {
+    func reset(_ elems: [T.Elem], index: Int = 0, minCount: Int? = nil, maxCount: Int? = nil) {
         
         removeAll()
         append(elems: elems)
@@ -71,8 +74,8 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
             self.minCount = self.maxCount
         }
         
-        self.currentIndex = min(currentIndex, arrayView.arrangedSubviews.count - 1)
-        highlight(index: self.currentIndex)
+        self.index = min(index, arrayView.arrangedSubviews.count - 1)
+        highlight(index: self.index)
     }
     
     override init(frame: CGRect) {
@@ -151,16 +154,21 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     }
     @objc private func tapView(_ sender: UITapGestureRecognizer) {
         guard let view = sender.view,
-              let index = arrayView.arrangedSubviews.firstIndex(of: view) else { return }
+              let newIndex = arrayView.arrangedSubviews.firstIndex(of: view) else { return }
         
-        didTapColor?(currentIndex, index)
+        selectView(newIndex)
+    }
+    
+    func selectView(_ index: Int) {
+        didChangeIndex?(self.index, index)
         
-        currentIndex = index
+        self.index = index
         highlight(index: index)
     }
     
     // MARK: Methods
-    func refreshView(with elem: T.Elem, at index: Int) {
+    func refreshView(with elem: T.Elem, at index: Int? = nil) {
+        let index = index ?? self.index
         (arrayView.arrangedSubviews[index] as? T)?.refreshView(with: elem)
     }
     func insert(elem: T.Elem?, at index: Int) {
@@ -187,7 +195,7 @@ class ArrayHorizontalView<T: ArrayElemViewProtocol>: UIView, UIScrollViewDelegat
     func setArrayCountToCurrentIndex() {
         currentView?.highlight(false)
         
-        currentIndex = elemNum - 1
+        self.index = elemNum - 1
         
         currentView?.highlight(true)
     }

@@ -70,7 +70,7 @@ class SlidersSegmentView: UIView, ColorAdjustmentSegmentViewProtocol {
     }
     
     // MARK: Methods
-    func setColor(_ color: UIColor) {
+    func refreshView(with color: UIColor) {
         var red = CGFloat(0)
         var green = CGFloat(0)
         var blue = CGFloat(0)

@@ -31,9 +31,9 @@ class ViewController: UIViewController {
     private func addObservers() {
         
         // If the index of the data changes, the adjustment is refreshed.
-        colorPalette.didTapColor = { [unowned self] previousIndex, currentIndex in
-            if previousIndex != currentIndex {
-                colorData.index = currentIndex
+        colorPalette.didChangeIndex = { [unowned self] oldIndex, newIndex in
+            if oldIndex != newIndex {
+                colorData.index = newIndex
                 
             } else {
                 toggleColorAdjustment()
@@ -70,15 +70,15 @@ class ViewController: UIViewController {
         colorAdjustment.didTapRemoveButton = { [unowned self] in
             if colorPalette.canRemoveElem {
                 
-                let index = colorPalette.currentIndex
+                let index = colorPalette.index
                 
                 colorData.removeColorData(at: index)
                 colorPalette.removeElem(at: index)
                 
-                if colorPalette.currentIndex > colorPalette.elemNum - 1 {
+                if colorPalette.index > colorPalette.elemNum - 1 {
                     colorPalette.setArrayCountToCurrentIndex()
                 }
-                colorData.index = colorPalette.currentIndex
+                colorData.index = colorPalette.index
                 
             } else {
                 showToast("It cannot be removed any more")
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         colorAdjustment.didTapDuplicateButton = { [unowned self] in
             if colorPalette.canDuplicateElem {
                 
-                let index = colorPalette.currentIndex
+                let index = colorPalette.index
                 let color = colorData.colorArray[index]
                 
                 colorData.insert(colorData: color, at: index + 1)

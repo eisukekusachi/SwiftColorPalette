@@ -14,7 +14,7 @@ protocol ColorAdjustmentSegmentViewProtocol: UIView {
     var title: String { get }
     
     var colorAdjustmentDelegate: ColorAdjustmentDelegate? { get set }
-    func setColor(_ color: UIColor)
+    func refreshView(with color: UIColor)
 }
 
 class ColorAdjustmentPopup: PopupViewWithArrow {
@@ -39,8 +39,8 @@ class ColorAdjustmentPopup: PopupViewWithArrow {
     
     private var title: String = ""
     
-    private var rgbSegmentsView: RGBSegmentsView!
-    private var alphaSlider: ColorSliderView!
+    private var rgbSegmentsView: RGBSegmentsView = RGBSegmentsView()
+    private var alphaSlider: ColorSliderView = ColorSliderView()
     
     private let closeButton = UIButton()
     private let buttonStackView = UIStackView()
@@ -80,6 +80,10 @@ class ColorAdjustmentPopup: PopupViewWithArrow {
         addSubviews()
         addConstraints()
         addParameters()
+        
+        if rgbSegmentsView.segmentViewCount == 0 {
+            rgbSegmentsView.removeFromSuperview()
+        }
     }
     private func addSubviews() {
         

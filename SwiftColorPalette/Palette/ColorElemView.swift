@@ -96,6 +96,7 @@ class ColorElemView: UIView, ArrayElemViewProtocol {
     
     // MARK: Methods
     func refreshView(with elem: Elem) {
+        self.elem = elem
         colorView.backgroundColor = elem
     }
     func highlight(_ flag: Bool) {
